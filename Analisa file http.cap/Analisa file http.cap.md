@@ -33,24 +33,13 @@ Saya akan merapikan dokumen markdown tersebut agar lebih terstruktur dan mudah d
 ## Tugas 2: Analisis Gambar Types of Data Deliveries
 
 ### 1. Node to Node (Data Link Layer)
-- Komunikasi antara dua node/perangkat jaringan yang terhubung langsung
-- Terjadi di level paling dasar (router-ke-router atau komputer-ke-router)
-- Menggunakan protokol data link layer seperti Ethernet
-- Menggunakan alamat MAC untuk identifikasi perangkat
-- Contoh: Komunikasi antara laptop dengan router WiFi rumah
+Node-to-node communication adalah proses komunikasi langsung antara dua perangkat dalam jaringan yang berada dalam satu segmen jaringan yang sama. Komunikasi ini menggunakan protokol pada Data Link Layer (Lapisan 2 dalam model OSI), seperti Ethernet, untuk memastikan data dapat dikirim tanpa perlu melewati perantara seperti router. Identifikasi perangkat dalam komunikasi ini dilakukan menggunakan alamat MAC (Media Access Control), yang merupakan alamat unik yang dimiliki setiap perangkat jaringan. Karena berbasis pada protokol Data Link Layer, komunikasi ini umumnya terjadi dalam jaringan lokal (LAN) dan memungkinkan perangkat untuk bertukar data dengan cepat dalam satu segmen jaringan tanpa perlu melibatkan alamat IP atau routing.
 
 ### 2. Host to Host (Network Layer)
-- Komunikasi end-to-end antara komputer sumber dan tujuan
-- Mencakup seluruh path melalui internet
-- Menggunakan protokol IP (Internet Protocol)
-- Contoh: Komunikasi antara komputer pengguna dengan server website
+Host-to-host communication pada Network Layer (Lapisan 3 dalam model OSI) adalah proses komunikasi end-to-end antara dua perangkat di jaringan yang bisa berada dalam jaringan yang berbeda. Komunikasi ini menggunakan Internet Protocol (IP) sebagai mekanisme utama untuk mengidentifikasi dan mengarahkan paket data dari satu host ke host lainnya, bahkan jika mereka berada di lokasi geografis yang berjauhan. Berbeda dengan komunikasi node-to-node yang terbatas pada satu segmen jaringan, host-to-host communication memungkinkan data melewati beberapa jaringan dengan bantuan perangkat perantara seperti router. Selama perjalanan, paket data akan melalui path lengkap melalui internet, melewati berbagai jaringan dan hop sebelum mencapai tujuan akhirnya, di mana data kemudian diteruskan ke aplikasi yang sesuai pada perangkat penerima.
 
 ### 3. Process to Process (Transport Layer)
-- Komunikasi antara aplikasi/proses spesifik di komputer sumber dan tujuan
-- Level tertinggi, menangani komunikasi antar aplikasi
-- Menggunakan protokol TCP/UDP
-- Menggunakan port number untuk identifikasi aplikasi
-- Contoh: Komunikasi antara browser dengan web server
+Process-to-process communication adalah bentuk komunikasi dalam jaringan yang memungkinkan aplikasi pada satu perangkat berinteraksi langsung dengan aplikasi di perangkat lain. Komunikasi ini terjadi pada Transport Layer (Lapisan 4 dalam model OSI) dan menggunakan protokol seperti TCP (Transmission Control Protocol) untuk koneksi yang andal atau UDP (User Datagram Protocol) untuk komunikasi yang lebih cepat namun tanpa jaminan keandalan. Untuk memastikan data dikirim ke aplikasi yang benar, sistem menggunakan port number sebagai identitas unik setiap layanan atau proses yang berjalan di suatu perangkat. Misalnya, port 80 digunakan untuk HTTP dan port 443 untuk HTTPS, sehingga browser dapat berkomunikasi dengan server web yang tepat tanpa terjadi kesalahan rute dalam pertukaran data.
 
 ## Tugas 3: Resume Tahapan TCP
 
