@@ -7,7 +7,8 @@
 
 2. **Eksplorasi dan Analisis di Wireshark**
     ![alt text](image.png)
-    - **IP Server dan Client**: 
+    ![alt text](image-1.png)
+    - **IP Server dan Client**:
       - Identifikasi IP server dan client dari file capture.
     - **Versi HTTP**: 
       - Tentukan versi HTTP yang digunakan.
