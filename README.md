@@ -26,17 +26,6 @@ Dengan adanya repository ini, saya berharap dapat:
 - 🤝 Berbagi ilmu dengan mahasiswa lain.
 - 📝 Merekam perkembangan saya dalam memahami dan mengimplementasikan konsep jaringan.
 
-## 🚀 Cara Menggunakan Repository Ini
-1. Clone repository ini dengan perintah berikut:
-   ```bash
-   git clone https://github.com/username/AdminJaringan2025.git
-   ```
-2. Jelajahi direktori tugas sesuai topik yang Anda butuhkan.
-3. Gunakan dan pelajari setiap tugas sebagai referensi dalam memahami materi perkuliahan.
-
-## 🤝 Kontribusi
-Jika Anda ingin berkontribusi atau memberikan masukan, silakan buat **Issue** atau **Pull Request** di repository ini.
-
 ---
 
 **📢 Adrian Mendienta Tumanggor**
