@@ -1,3 +1,6 @@
 # AdminJaringan2025
 
-# HELLO 
+Repository ini berisi kumpulan tugas yang dikerjakan selama mata kuliah ADMIN JARINGAN. Mata kuliah ini merupakan bagian dari program studi D4 Teknik Informatika A. Setiap tugas dalam repository ini mencakup berbagai topik yang diajarkan dalam mata kuliah, mulai dari dasar-dasar administrasi jaringan hingga teknik lanjutan. Saya, Adrian Mendienta Tumanggor, adalah mahasiswa yang mengerjakan tugas-tugas ini. Tujuan dari repository ini adalah untuk mendokumentasikan dan memudahkan akses terhadap semua tugas yang telah diselesaikan, serta sebagai referensi bagi mahasiswa lain yang mengambil mata kuliah yang sama.
+Repository ini juga berfungsi sebagai portofolio yang menunjukkan perkembangan kemampuan saya dalam administrasi jaringan. Setiap tugas yang ada di dalamnya telah melalui proses pembelajaran yang mendalam dan penerapan praktis dari konsep-konsep yang diajarkan. Dengan adanya repository ini, saya berharap dapat memberikan gambaran yang jelas mengenai kemampuan teknis yang telah saya kuasai selama mengikuti mata kuliah ini.
+
+Selain itu, repository ini diharapkan dapat menjadi sumber inspirasi dan referensi bagi mahasiswa lain yang sedang atau akan mengambil mata kuliah ADMIN JARINGAN. Dengan mendokumentasikan setiap tugas secara terstruktur, saya ingin memudahkan proses belajar dan membantu mahasiswa lain dalam memahami materi yang diajarkan. Semoga repository ini dapat bermanfaat bagi semua pihak yang berkepentingan.
