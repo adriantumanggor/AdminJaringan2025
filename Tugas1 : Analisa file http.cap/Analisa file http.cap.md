@@ -15,6 +15,11 @@ Saya akan merapikan dokumen markdown tersebut agar lebih terstruktur dan mudah d
 
 ### 3. Eksplorasi dan Analisis di Wireshark
 
+![alt text](image1.png)
+![alt text](image2.png)
+![alt text](image3.png)
+
+
 #### IP Server dan Client
 - IP Server: 65.208.228.223
 - IP Client: 145.254.160.237
