@@ -40,5 +40,5 @@ Jika Anda ingin berkontribusi atau memberikan masukan, silakan buat **Issue** at
 ---
 
 **📢 Adrian Mendienta Tumanggor**
-Mahasiswa D4 Teknik Informatika A 🖥️ | Aku sipaling ADMINT 🌐
+Mahasiswa D4 Teknik Informatika A 🖥️ | Aku sipaling ADMINTJARINGAN 🌐
 
