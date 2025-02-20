@@ -6,6 +6,7 @@
     - Download `http.cap` di [SampleCaptures](https://wiki.wireshark.org/SampleCaptures)
 
 2. **Eksplorasi dan Analisis di Wireshark**
+    ![alt text](image.png)
     - **IP Server dan Client**: 
       - Identifikasi IP server dan client dari file capture.
     - **Versi HTTP**: 
