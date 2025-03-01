@@ -1,5 +1,3 @@
-Saya akan merapikan dokumen markdown tersebut agar lebih terstruktur dan mudah dibaca:
-
 # Tugas Workshop Administrasi Jaringan [REVIEW]
 
 ## Tugas 1: Analisa file http.cap
