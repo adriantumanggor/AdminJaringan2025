@@ -3,37 +3,130 @@
 ## Daftar Isi
 - [Pendahuluan](#pendahuluan)
 - [Persiapan Lab](#persiapan-lab)
-- [Praktikum 1: Memonitor Proses](#praktikum-1-memonitor-proses)
-- [Praktikum 2: Mengelola Proses](#praktikum-2-mengelola-proses)
-- [Praktikum 3: Prioritas Proses](#praktikum-3-prioritas-proses)
-- [Praktikum 4: Menggunakan Sinyal](#praktikum-4-menggunakan-sinyal)
-- [Praktikum 5: Menjadwalkan Proses dengan cron](#praktikum-5-menjadwalkan-proses-dengan-cron)
-- [Praktikum 6: Debugging Proses dengan strace](#praktikum-6-debugging-proses-dengan-strace)
-- [Latihan Mandiri](#latihan-mandiri)
+- [Memonitor Proses](#memonitor-proses)
+- [Mengelola Proses](#mengelola-proses)
+- [Prioritas Proses](#prioritas-proses)
+- [Menggunakan Sinyal](#menggunakan-sinyal)
+- [Menjadwalkan Proses dengan cron](#menjadwalkan-proses-dengan-cron)
+- [Debugging Proses dengan strace](#debugging-proses-dengan-strace)
 
 ## Pendahuluan
 
-Proses adalah komponen fundamental dalam sistem operasi Unix/Linux. Setiap proses terdiri dari:
-- Address space (kode, data, stack)
-- Struktur data kernel untuk melacak status
-- Sumber daya yang dialokasikan
+Komponen dari Sebuah Proses
 
-Dokumen ini menyediakan panduan praktis untuk memahami dan mengelola proses di lingkungan Unix/Linux.
+Sebuah proses terdiri dari address space dan serangkaian struktur data di dalam kernel. address space adalah sekumpulan halaman memori yang telah ditandai oleh kernel untuk digunakan oleh proses tersebut. (Halaman adalah unit di mana memori dikelola. Biasanya berukuran 4KiB atau 8KiB.) Halaman-halaman ini digunakan untuk menyimpan kode, data, dan stack dari proses. Struktur data di dalam kernel melacak status proses, prioritasnya, parameter penjadwalannya, dan sebagainya.
 
-## Persiapan Lab
+Proses seperti wadah untuk sekumpulan sumber daya yang dikelola oleh kernel atas nama program yang sedang berjalan. Sumber daya ini termasuk halaman memori yang menyimpan kode dan data program, deskriptor file yang merujuk ke file yang terbuka, dan berbagai atribut yang menggambarkan status proses.
+
+Struktur data internal kernel mencatat berbagai informasi tentang setiap proses:
+
+- Peta proses address space
+- Status saat ini dari proses (berjalan, tidur, dan sebagainya)
+- Prioritas proses
+- Informasi tentang sumber daya yang telah digunakan oleh proses (CPU, memori, dan sebagainya)
+- Informasi tentang file dan port jaringan yang telah dibuka oleh proses
+- Masker sinyal proses (set sinyal yang saat ini diblokir)
+- Pemilik proses (ID pengguna dari pengguna yang memulai proses)
+
+Sebuah "thread" adalah konteks eksekusi di dalam sebuah proses. Sebuah proses dapat memiliki beberapa thread, yang semuanya berbagi address space dan sumber daya lainnya. Thread digunakan untuk mencapai paralelisme di dalam sebuah proses. Thread juga dikenal sebagai proses ringan karena jauh lebih murah untuk dibuat dan dihancurkan dibandingkan dengan proses.
+
+Sebagai contoh untuk memahami konsep proses dan thread, pertimbangkan sebuah server web. Server web mendengarkan koneksi yang masuk dan kemudian membuat thread baru untuk menangani setiap permintaan yang masuk. Setiap thread menangani satu permintaan pada satu waktu, tetapi server web secara keseluruhan dapat menangani banyak permintaan secara bersamaan karena memiliki banyak thread. Di sini, server web adalah sebuah proses, dan setiap thread adalah konteks eksekusi terpisah di dalam proses tersebut.
+
+## Memulai Lab
+
+### Struktur Direktori
+
+```
+/AdminJaringan2025/
+├── ...
+├── Tugas2 : Process Control/
+├── ....
+├── unix-and-linux-sysadmin-notes/
+│   ├── process-control/
+│   │    ├── data/
+│   │    └── training/
+│   └── docker-compose.yml
+└── ....
+```
 
 1. Masuk ke direktori `/unix-and-linux-sysadmin-notes/`
-2. Jalankan container lab:
+2. Jalankan perintah berikut untuk memulai environment lab:
    ```bash
    docker-compose up -d --build
    ```
-3. Verifikasi container dan network sudah berhasil dibuat
-4. Masuk ke container lab:
+3. Pastikan container dan network sudah berhasil dibuat:
+    ![alt text](setup-container.png)
+    ![alt text](setup-network.png)
+3. masuk ke container lab:
+
+untuk percobaan ini kita akan menggunakan lab-debian/
+
    ```bash
    docker exec -it lab-debian bash
    ```
 
-## Praktikum 1: Memonitor Proses
+## Konsep Dasar Process Control
+
+### Anatomi Proses
+
+Proses di Unix/Linux memiliki beberapa karakteristik penting:
+
+- **PID (Process ID)**: Pengenal unik untuk setiap proses
+- **PPID (Parent Process ID)**: ID dari proses induk yang membuat proses tersebut
+- **UID dan GID**: User ID dan Group ID yang menjalankan proses
+- **Prioritas dan jadwal eksekusi**: Menentukan kapan dan seberapa sering proses mendapat jatah CPU
+- **Working directory**: Direktori kerja dari proses
+- **Environment variables**: Variabel lingkungan yang tersedia untuk proses
+- **Handlers**: Rutinitas untuk menangani berbagai sinyal
+- **File descriptor**: Pointer ke file, socket, dan resources lain
+
+### Siklus Hidup Proses
+
+1. **Pembuatan Proses**:
+   - Proses dibuat melalui system call `fork()` yang membuat duplikat (child) dari proses yang memanggilnya (parent)
+   - Child process biasanya melanjutkan dengan system call `exec()` untuk mengganti program yang dieksekusi
+
+2. **Eksekusi**:
+   - Proses aktif berjalan di CPU
+   - Dijadwalkan oleh kernel berdasarkan prioritas dan algoritma penjadwalan
+
+3. **Terminasi**:
+   - Proses dapat berakhir normal dengan system call `exit()`
+   - Proses dapat dihentikan paksa dengan sinyal seperti SIGKILL
+
+### Status Proses
+
+Proses dapat berada dalam beberapa status:
+- **Running**: Proses aktif berjalan
+- **Sleeping**: Proses menunggu input/output atau sumber daya lain
+- **Stopped**: Proses dihentikan sementara (misalnya dengan SIGSTOP)
+- **Zombie**: Proses yang telah selesai tapi masih memiliki entry di tabel proses
+
+### Sinyal (Signals)
+
+Sinyal adalah cara untuk mengirim notifikasi ke sebuah proses. Mereka digunakan untuk memberitahu proses bahwa suatu kejadian tertentu telah terjadi.
+
+Ada sekitar tiga puluh jenis sinyal yang didefinisikan, dan mereka digunakan dalam berbagai cara:
+
+- Mereka dapat dikirim antar proses sebagai sarana komunikasi.
+- Mereka dapat dikirim oleh driver terminal untuk menghentikan, menginterupsi, atau menangguhkan proses ketika tombol seperti Ctrl+C dan Ctrl+Z ditekan.
+- Mereka dapat dikirim oleh administrator (dengan perintah kill) untuk mencapai berbagai tujuan.
+- Mereka dapat dikirim oleh kernel ketika sebuah proses melakukan pelanggaran seperti pembagian dengan nol.
+- Mereka dapat dikirim oleh kernel untuk memberitahu proses tentang kondisi "menarik" seperti kematian proses anak atau ketersediaan data pada saluran I/O.
+
+![Signals](https://liujunming.top/images/2018/12/71.png)
+
+Sinyal KILL, INT, TERM, HUP, dan QUIT semuanya terdengar seolah-olah mereka berarti hal yang hampir sama, tetapi penggunaannya sebenarnya sangat berbeda.
+
+- **KILL** tidak dapat diblokir dan menghentikan proses di tingkat kernel. Sebuah proses tidak pernah benar-benar menerima atau menangani sinyal ini.
+- **INT** dikirim oleh driver terminal ketika pengguna mengetik Ctrl+C. Ini adalah permintaan untuk menghentikan operasi saat ini. Program sederhana harus berhenti (jika mereka menangkap sinyal) atau membiarkan diri mereka dihentikan, yang merupakan default jika sinyal tidak ditangkap. Program yang memiliki baris perintah interaktif (seperti shell) harus menghentikan apa yang mereka lakukan, membersihkan, dan menunggu input pengguna lagi.
+- **TERM** adalah permintaan untuk menghentikan eksekusi sepenuhnya. Diharapkan bahwa proses yang menerima akan membersihkan statusnya dan keluar.
+- **HUP** dikirim ke proses ketika terminal pengendali ditutup. Awalnya digunakan untuk menunjukkan "hang up" dari koneksi telepon, sekarang sering digunakan untuk menginstruksikan proses daemon untuk menghentikan dan memulai ulang, sering kali untuk memperhitungkan konfigurasi baru. Perilaku tepatnya tergantung pada proses spesifik yang menerima sinyal HUP.
+- **QUIT** mirip dengan TERM, kecuali bahwa ia secara default menghasilkan core dump jika tidak ditangkap. Beberapa program menggunakan sinyal ini dan menafsirkannya untuk berarti sesuatu yang lain.
+
+Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola proses dengan cara yang fleksibel dan efektif. Misalnya, daemon server dapat mereload konfigurasi tanpa downtime menggunakan HUP, atau proses yang tidak merespons dapat dihentikan secara paksa menggunakan KILL.
+
+## Memonitor Proses
 
 ### 1.1. Menggunakan ps
 
@@ -120,7 +213,7 @@ Dokumen ini menyediakan panduan praktis untuk memahami dan mengelola proses di l
    ls -l /proc/$PID/fd
    ```
 
-## Praktikum 2: Mengelola Proses
+## Mengelola Proses
 
 ### 2.1. Membuat Proses Background
 
@@ -206,7 +299,7 @@ Dokumen ini menyediakan panduan praktis untuk memahami dan mengelola proses di l
    pidof bash
    ```
 
-## Praktikum 3: Prioritas Proses
+## Prioritas Proses
 
 ### 3.1. Memahami nice dan renice
 
@@ -348,7 +441,7 @@ Dokumen ini menyediakan panduan praktis untuk memahami dan mengelola proses di l
    ps aux | grep defunct
    ```
 
-## Praktikum 5: Menjadwalkan Proses dengan cron
+## Menjadwalkan Proses dengan cron
 
 ### 5.1. Membuat Crontab
 
@@ -401,7 +494,7 @@ Dokumen ini menyediakan panduan praktis untuk memahami dan mengelola proses di l
 
 3. Simpan dan keluar dari editor.
 
-## Praktikum 6: Debugging Proses dengan strace
+## Debugging Proses dengan strace
 
 ### 6.1. Menggunakan strace
 
@@ -461,32 +554,3 @@ Dokumen ini menyediakan panduan praktis untuk memahami dan mengelola proses di l
    ```bash
    strace -e open,openat ./hello.sh
    ```
-
-## Latihan Mandiri
-
-Setelah menyelesaikan semua praktikum, cobalah latihan-latihan berikut:
-
-1. **Runaway Process**: 
-   - Buat script yang menggunakan CPU secara intensif
-   - Jalankan beberapa instance
-   - Gunakan `top`, `ps`, dan `kill` untuk mengidentifikasi dan menghentikan proses tersebut
-
-2. **Monitoring Resources**:
-   - Buat script monitoring sederhana yang mencatat penggunaan CPU dan memori
-   - Jadwalkan agar berjalan setiap 15 menit menggunakan cron
-   - Analisis hasil untuk mengidentifikasi tren penggunaan sumber daya
-
-3. **Simulasi Skenario Masalah**:
-   - Buat script yang menyimulasikan proses yang kehabisan memori
-   - Gunakan `strace` untuk mengidentifikasi system calls yang gagal
-   - Gunakan tools monitoring untuk mengidentifikasi masalah
-
-4. **Daemon Process**:
-   - Buat script sederhana yang berjalan sebagai daemon
-   - Gunakan sinyal untuk mengendalikannya (reload config, restart, shutdown)
-   - Praktikkan mengelola daemon dengan various systemd commands
-
-5. **Optimalisasi Proses**:
-   - Identifikasi proses yang berjalan dengan prioritas default
-   - Bereksperimen dengan berbagai nilai nice
-   - Ukur dan bandingkan kinerja dengan prioritas yang berbeda
