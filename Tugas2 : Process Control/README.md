@@ -2,7 +2,6 @@
 
 ## Daftar Isi
 - [Pendahuluan](#pendahuluan)
-- [Prasyarat](#prasyarat)
 - [Memulai Lab](#memulai-lab)
 - [Konsep Dasar Process Control](#konsep-dasar-process-control)
   - [Anatomi Proses](#anatomi-proses)
@@ -27,27 +26,42 @@
 
 ## Pendahuluan
 
-Process control merupakan konsep penting dalam UNIX dan Linux yang menjelaskan bagaimana sistem operasi mengelola dan mengendalikan proses. Proses adalah program yang sedang dijalankan dan merupakan salah satu konsep dasar dalam sistem operasi. 
+Komponen dari Sebuah Proses
 
-Dokumentasi ini didasarkan pada Bab 4 dari buku "UNIX and Linux System Administration Handbook (Edisi 5)" yang membahas secara mendalam tentang proses, bagaimana proses dibuat, bagaimana proses dihentikan, dan bagaimana sistem operasi menjadwalkan proses.
+Sebuah proses terdiri dari address space dan serangkaian struktur data di dalam kernel. address space adalah sekumpulan halaman memori yang telah ditandai oleh kernel untuk digunakan oleh proses tersebut. (Halaman adalah unit di mana memori dikelola. Biasanya berukuran 4KiB atau 8KiB.) Halaman-halaman ini digunakan untuk menyimpan kode, data, dan stack dari proses. Struktur data di dalam kernel melacak status proses, prioritasnya, parameter penjadwalannya, dan sebagainya.
 
-## Prasyarat
+Proses seperti wadah untuk sekumpulan sumber daya yang dikelola oleh kernel atas nama program yang sedang berjalan. Sumber daya ini termasuk halaman memori yang menyimpan kode dan data program, deskriptor file yang merujuk ke file yang terbuka, dan berbagai atribut yang menggambarkan status proses.
 
-Sebelum memulai praktikum process control, pastikan Anda memiliki:
-- Pengetahuan dasar tentang terminal Linux
-- Docker dan Docker Compose sudah terinstal pada sistem Anda
-- Git untuk mengakses repositori ini
+Struktur data internal kernel mencatat berbagai informasi tentang setiap proses:
+
+- Peta proses address space
+- Status saat ini dari proses (berjalan, tidur, dan sebagainya)
+- Prioritas proses
+- Informasi tentang sumber daya yang telah digunakan oleh proses (CPU, memori, dan sebagainya)
+- Informasi tentang file dan port jaringan yang telah dibuka oleh proses
+- Masker sinyal proses (set sinyal yang saat ini diblokir)
+- Pemilik proses (ID pengguna dari pengguna yang memulai proses)
+
+Sebuah "thread" adalah konteks eksekusi di dalam sebuah proses. Sebuah proses dapat memiliki beberapa thread, yang semuanya berbagi address space dan sumber daya lainnya. Thread digunakan untuk mencapai paralelisme di dalam sebuah proses. Thread juga dikenal sebagai proses ringan karena jauh lebih murah untuk dibuat dan dihancurkan dibandingkan dengan proses.
+
+Sebagai contoh untuk memahami konsep proses dan thread, pertimbangkan sebuah server web. Server web mendengarkan koneksi yang masuk dan kemudian membuat thread baru untuk menangani setiap permintaan yang masuk. Setiap thread menangani satu permintaan pada satu waktu, tetapi server web secara keseluruhan dapat menangani banyak permintaan secara bersamaan karena memiliki banyak thread. Di sini, server web adalah sebuah proses, dan setiap thread adalah konteks eksekusi terpisah di dalam proses tersebut.
 
 ## Memulai Lab
 
-1. Pastikan Anda berada di direktori `/unix-and-linux-sysadmin-notes/`
+1. Masuk ke direktori `/unix-and-linux-sysadmin-notes/`
 2. Jalankan perintah berikut untuk memulai environment lab:
    ```bash
-   docker-compose up -d
+   docker-compose up -d --build
    ```
-3. Untuk masuk ke container lab:
+3. Pastikan container dan network sudah berhasil dibuat:
+    ![alt text](setup-container.png)
+    ![alt text](setup-network.png)
+3. masuk ke container lab:
+
+untuk percobaan ini kita akan menggunakan lab-debian/
+
    ```bash
-   docker-compose exec linux-lab bash
+   docker exec -it lab-debian bash
    ```
 
 ## Konsep Dasar Process Control
