@@ -48,6 +48,21 @@ Sebagai contoh untuk memahami konsep proses dan thread, pertimbangkan sebuah ser
 
 ## Memulai Lab
 
+### Struktur Direktori
+
+```
+/AdminJaringan2025/
+├── ...
+├── Tugas2 : Process Control/
+├── ....
+├── unix-and-linux-sysadmin-notes/
+│   ├── process-control/
+│   │    ├── data/
+│   │    └── training/
+│   └── docker-compose.yml
+└── ....
+```
+
 1. Masuk ke direktori `/unix-and-linux-sysadmin-notes/`
 2. Jalankan perintah berikut untuk memulai environment lab:
    ```bash
@@ -260,21 +275,6 @@ Process control adalah komponen fundamental dalam administrasi sistem UNIX dan L
 - Manajemen sumber daya sistem
 - Otomatisasi tugas administrasi
 - Pemeliharaan layanan yang handal
-
-## Struktur Direktori
-
-```
-/AdminJaringan2025/
-├── ...
-├── Tugas2 : Process Control/
-├── ....
-├── unix-and-linux-sysadmin-notes/
-│   ├── process-control/
-│   │    ├── data/
-│   │    └── training/
-│   └── docker-compose.yml
-└── ....
-```
 
 ## Referensi
 
