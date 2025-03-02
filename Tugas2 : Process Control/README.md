@@ -145,7 +145,7 @@ Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola 
    ps lax
    ```
 
-    ![alt text](image.png)
+    ![alt text](ps.png)
 
 Amati kolom output dan catat informasi yang ditampilkan:
    - USER: pemilik proses
@@ -169,7 +169,7 @@ Amati kolom output dan catat informasi yang ditampilkan:
    ```bash
    top
    ```
-   ![alt text](image-2.png)
+   ![alt text](top.png)
 
 2. Pelajari kontrol interaktif di top:
    - `q`: keluar dari top
@@ -186,7 +186,7 @@ Amati kolom output dan catat informasi yang ditampilkan:
    ```
    (Jika tidak tersedia, instal dengan `apt-get install htop`)
 
-   ![alt text](image-3.png)
+   ![alt text](htop.png)
 
 
 ### 1.3. Memeriksa /proc Filesystem
@@ -221,7 +221,7 @@ Amati kolom output dan catat informasi yang ditampilkan:
    # Lihat file descriptor yang dibuka
    ls -l /proc/$PID/fd
    ```
-   ![alt text](image-4.png)
+   ![alt text](procFilesystem.png)
 
 ## Mengelola Proses
 
@@ -295,7 +295,7 @@ Amati kolom output dan catat informasi yang ditampilkan:
    # Hentikan semua proses dengan nama tertentu
    pkill -f infinite.sh
    ```
-![alt text](image-6.png)
+![alt text](kill.png)
 
 ### 2.3. Menemukan PID Proses
 
@@ -318,7 +318,7 @@ Amati kolom output dan catat informasi yang ditampilkan:
    ```bash
    nice -n 10 ./infinite.sh &
    ```
-   ![alt text](image-5.png)
+   ![alt text](nice.png)
 
 2. Jalankan proses dengan prioritas nice tinggi (nilai rendah):
    ```bash
