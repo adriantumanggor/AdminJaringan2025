@@ -6,7 +6,7 @@ Unix and Linux system administration handbook by Evi Nemeth Garth Snyder Trent R
 
 You can buy the book [here](https://www.amazon.com/UNIX-Linux-System-Administration-Handbook/dp/0134277554)
 
-## POV
+<!-- ## POV
 
 This repository is a collection of notes from the book *Unix and Linux system administration handbook by Evi Nemeth Garth Snyder Trent R. Hein Ben Whaley Dan Mackin*. I am reading the 5th edition of the book. This shit is a comprehensive guide to Unix and Linux system administration. 
 
@@ -46,7 +46,7 @@ The notes are organized in chapters. Each chapter has a `readme.md` file that co
 - [Chapter28: Monitoring](./monitoring/readme.md)
 - [Chapter29: Performance Analysis](./performance-analysis/readme.md)
 - [Chapter30: Data Center Basics](./data-center-basics/readme.md)
-- [Chapter31: Methodology, Policy, and Politics](./methodology-policy-and-politics/readme.md)
+- [Chapter31: Methodology, Policy, and Politics](./methodology-policy-and-politics/readme.md) -->
 
 ## Testing lab
 
