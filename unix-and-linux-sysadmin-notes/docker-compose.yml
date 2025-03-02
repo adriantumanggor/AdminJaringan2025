@@ -1,4 +1,4 @@
-version: '3.8' 
+version: '3.8'
 
 services:
   centos:
@@ -31,7 +31,7 @@ networks:
   lab-net:
     driver: bridge
     name: lab-net
-    ipam: 
+    ipam:
       config:
         - subnet: 192.168.50.0/24
           gateway: 192.168.50.1
