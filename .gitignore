@@ -1,6 +1,8 @@
 unix-and-linux-sysadmin-notes/*
 !unix-and-linux-sysadmin-notes/process-control/
 !unix-and-linux-sysadmin-notes/process-control/**
+!unix-and-linux-sysadmin-notes/the-filesystem/
+!unix-and-linux-sysadmin-notes/the-filesystem/**
 !unix-and-linux-sysadmin-notes/lab-volumes/
 !unix-and-linux-sysadmin-notes/lab-volumes/**
 !unix-and-linux-sysadmin-notes/docker-compose.yml
