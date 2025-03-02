@@ -103,14 +103,16 @@ Proses dapat berada dalam beberapa status:
 
 ### Sinyal (Signals)
 
-Sinyal adalah mekanisme komunikasi asinkron antarproses di UNIX/Linux. Beberapa sinyal penting:
+Sinyal adalah mekanisme komunikasi asinkron antarproses di UNIX/Linux yang memungkinkan proses untuk saling mengirimkan notifikasi atau instruksi. Sinyal dapat digunakan untuk berbagai tujuan, seperti menghentikan proses, melanjutkan proses, atau memberitahu proses tentang suatu kejadian. Berikut adalah beberapa sinyal penting yang sering digunakan:
 
-- **SIGHUP (1)**: Hangup, biasanya untuk mereload konfigurasi
-- **SIGINT (2)**: Interrupt (Ctrl+C)
-- **SIGKILL (9)**: Menghentikan proses secara paksa (tidak dapat diblock)
-- **SIGTERM (15)**: Terminasi normal (dapat dihandle)
-- **SIGSTOP (19)**: Menghentikan proses sementara (tidak dapat diblock)
-- **SIGCONT (18)**: Melanjutkan proses yang berhenti
+- **SIGHUP (1)**: Hangup. Sinyal ini biasanya dikirim ke proses ketika terminal yang menjalankan proses tersebut ditutup. Banyak daemon menggunakan sinyal ini untuk mereload konfigurasi tanpa harus dihentikan dan dijalankan kembali.
+- **SIGINT (2)**: Interrupt. Sinyal ini dikirim ketika pengguna menekan Ctrl+C di terminal. Ini biasanya digunakan untuk menghentikan proses yang sedang berjalan.
+- **SIGKILL (9)**: Kill. Sinyal ini digunakan untuk menghentikan proses secara paksa. Tidak seperti sinyal lainnya, SIGKILL tidak dapat ditangkap, diblokir, atau diabaikan oleh proses. Ini adalah cara terakhir untuk menghentikan proses yang tidak merespons sinyal lain.
+- **SIGTERM (15)**: Terminate. Sinyal ini adalah permintaan untuk terminasi proses secara normal. Proses dapat menangkap sinyal ini dan melakukan pembersihan sebelum berhenti. Ini adalah cara yang lebih sopan untuk menghentikan proses dibandingkan dengan SIGKILL.
+- **SIGSTOP (19)**: Stop. Sinyal ini menghentikan proses sementara. Tidak seperti SIGTERM dan SIGKILL, SIGSTOP tidak dapat ditangkap atau diabaikan oleh proses. Ini sering digunakan dalam job control untuk menghentikan proses sementara.
+- **SIGCONT (18)**: Continue. Sinyal ini digunakan untuk melanjutkan proses yang telah dihentikan oleh SIGSTOP. Ini memungkinkan proses untuk melanjutkan eksekusi dari titik di mana ia dihentikan.
+
+Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola proses dengan cara yang fleksibel dan efektif. Misalnya, daemon server dapat mereload konfigurasi tanpa downtime menggunakan SIGHUP, atau proses yang tidak merespons dapat dihentikan secara paksa menggunakan SIGKILL.
 
 ## Perintah-perintah Dasar
 
