@@ -160,6 +160,8 @@ Amati kolom output dan catat informasi yang ditampilkan:
    - TIME: waktu CPU yang digunakan
    - COMMAND: perintah yang dijalankan
 
+![process-explanation](../unix-and-linux-sysadmin-notes/process-control/data/process-explanation.png)
+
 
 ### 1.2. Menggunakan top dan htop
 
