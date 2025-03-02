@@ -1,5 +1,7 @@
 unix-and-linux-sysadmin-notes/*
 !unix-and-linux-sysadmin-notes/process-control/
 !unix-and-linux-sysadmin-notes/process-control/**
+!unix-and-linux-sysadmin-notes/lab-volumes/
+!unix-and-linux-sysadmin-notes/lab-volumes/**
 !unix-and-linux-sysadmin-notes/docker-compose.yml
 !unix-and-linux-sysadmin-notes/README.md
