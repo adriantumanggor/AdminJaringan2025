@@ -103,18 +103,27 @@ Proses dapat berada dalam beberapa status:
 
 ### Sinyal (Signals)
 
-Sinyal adalah mekanisme komunikasi asinkron antarproses di UNIX/Linux yang memungkinkan proses untuk saling mengirimkan notifikasi atau instruksi. Sinyal dapat digunakan untuk berbagai tujuan, seperti menghentikan proses, melanjutkan proses, atau memberitahu proses tentang suatu kejadian. Berikut adalah beberapa sinyal penting yang sering digunakan:
+Sinyal adalah cara untuk mengirim notifikasi ke sebuah proses. Mereka digunakan untuk memberitahu proses bahwa suatu kejadian tertentu telah terjadi.
 
-- **SIGHUP (1)**: Hangup. Sinyal ini biasanya dikirim ke proses ketika terminal yang menjalankan proses tersebut ditutup. Banyak daemon menggunakan sinyal ini untuk mereload konfigurasi tanpa harus dihentikan dan dijalankan kembali.
-- **SIGINT (2)**: Interrupt. Sinyal ini dikirim ketika pengguna menekan Ctrl+C di terminal. Ini biasanya digunakan untuk menghentikan proses yang sedang berjalan.
-- **SIGKILL (9)**: Kill. Sinyal ini digunakan untuk menghentikan proses secara paksa. Tidak seperti sinyal lainnya, SIGKILL tidak dapat ditangkap, diblokir, atau diabaikan oleh proses. Ini adalah cara terakhir untuk menghentikan proses yang tidak merespons sinyal lain.
-- **SIGTERM (15)**: Terminate. Sinyal ini adalah permintaan untuk terminasi proses secara normal. Proses dapat menangkap sinyal ini dan melakukan pembersihan sebelum berhenti. Ini adalah cara yang lebih sopan untuk menghentikan proses dibandingkan dengan SIGKILL.
-- **SIGSTOP (19)**: Stop. Sinyal ini menghentikan proses sementara. Tidak seperti SIGTERM dan SIGKILL, SIGSTOP tidak dapat ditangkap atau diabaikan oleh proses. Ini sering digunakan dalam job control untuk menghentikan proses sementara.
-- **SIGCONT (18)**: Continue. Sinyal ini digunakan untuk melanjutkan proses yang telah dihentikan oleh SIGSTOP. Ini memungkinkan proses untuk melanjutkan eksekusi dari titik di mana ia dihentikan.
+Ada sekitar tiga puluh jenis sinyal yang didefinisikan, dan mereka digunakan dalam berbagai cara:
 
-Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola proses dengan cara yang fleksibel dan efektif. Misalnya, daemon server dapat mereload konfigurasi tanpa downtime menggunakan SIGHUP, atau proses yang tidak merespons dapat dihentikan secara paksa menggunakan SIGKILL.
+- Mereka dapat dikirim antar proses sebagai sarana komunikasi.
+- Mereka dapat dikirim oleh driver terminal untuk menghentikan, menginterupsi, atau menangguhkan proses ketika tombol seperti Ctrl+C dan Ctrl+Z ditekan.
+- Mereka dapat dikirim oleh administrator (dengan perintah kill) untuk mencapai berbagai tujuan.
+- Mereka dapat dikirim oleh kernel ketika sebuah proses melakukan pelanggaran seperti pembagian dengan nol.
+- Mereka dapat dikirim oleh kernel untuk memberitahu proses tentang kondisi "menarik" seperti kematian proses anak atau ketersediaan data pada saluran I/O.
 
-## Perintah-perintah Dasar
+![Signals](https://liujunming.top/images/2018/12/71.png)
+
+Sinyal KILL, INT, TERM, HUP, dan QUIT semuanya terdengar seolah-olah mereka berarti hal yang hampir sama, tetapi penggunaannya sebenarnya sangat berbeda.
+
+- **KILL** tidak dapat diblokir dan menghentikan proses di tingkat kernel. Sebuah proses tidak pernah benar-benar menerima atau menangani sinyal ini.
+- **INT** dikirim oleh driver terminal ketika pengguna mengetik Ctrl+C. Ini adalah permintaan untuk menghentikan operasi saat ini. Program sederhana harus berhenti (jika mereka menangkap sinyal) atau membiarkan diri mereka dihentikan, yang merupakan default jika sinyal tidak ditangkap. Program yang memiliki baris perintah interaktif (seperti shell) harus menghentikan apa yang mereka lakukan, membersihkan, dan menunggu input pengguna lagi.
+- **TERM** adalah permintaan untuk menghentikan eksekusi sepenuhnya. Diharapkan bahwa proses yang menerima akan membersihkan statusnya dan keluar.
+- **HUP** dikirim ke proses ketika terminal pengendali ditutup. Awalnya digunakan untuk menunjukkan "hang up" dari koneksi telepon, sekarang sering digunakan untuk menginstruksikan proses daemon untuk menghentikan dan memulai ulang, sering kali untuk memperhitungkan konfigurasi baru. Perilaku tepatnya tergantung pada proses spesifik yang menerima sinyal HUP.
+- **QUIT** mirip dengan TERM, kecuali bahwa ia secara default menghasilkan core dump jika tidak ditangkap. Beberapa program menggunakan sinyal ini dan menafsirkannya untuk berarti sesuatu yang lain.
+
+Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola proses dengan cara yang fleksibel dan efektif. Misalnya, daemon server dapat mereload konfigurasi tanpa downtime menggunakan HUP, atau proses yang tidak merespons dapat dihentikan secara paksa menggunakan KILL.
 
 ### Melihat Proses
 
