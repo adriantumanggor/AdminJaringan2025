@@ -1,4 +1,4 @@
-# Process Control di UNIX/Linux: Panduan Praktikum
+# Process Control di UNIX/Linux
 
 ## Daftar Isi
 - [Pendahuluan](#pendahuluan)
