@@ -134,8 +134,19 @@ Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola 
    ```bash
    ps aux
    ```
+   
+2. Gunakan perintah berikut untuk melihat struktur hierarki proses:
+   ```bash
+   ps f
+   ```
 
-2. Amati kolom output dan catat informasi yang ditampilkan:
+3. Gunakan `ps lax` untuk melihat informasi teknis lebih lanjut tentang proses:
+   ```bash
+   ps lax
+   ```
+
+    ![alt text](image.png)
+Amati kolom output dan catat informasi yang ditampilkan:
    - USER: pemilik proses
    - PID: ID proses
    - %CPU: persentase CPU yang digunakan
@@ -148,15 +159,6 @@ Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola 
    - TIME: waktu CPU yang digunakan
    - COMMAND: perintah yang dijalankan
 
-3. Gunakan perintah berikut untuk melihat struktur hierarki proses:
-   ```bash
-   ps f
-   ```
-
-4. Gunakan `ps lax` untuk melihat informasi teknis lebih lanjut tentang proses:
-   ```bash
-   ps lax
-   ```
 
 ### 1.2. Menggunakan top dan htop
 
