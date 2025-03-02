@@ -134,7 +134,7 @@ Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola 
    ```bash
    ps aux
    ```
-   
+
 2. Gunakan perintah berikut untuk melihat struktur hierarki proses:
    ```bash
    ps f
@@ -146,6 +146,7 @@ Sinyal-sinyal ini memungkinkan administrator sistem dan program untuk mengelola 
    ```
 
     ![alt text](image.png)
+
 Amati kolom output dan catat informasi yang ditampilkan:
    - USER: pemilik proses
    - PID: ID proses
