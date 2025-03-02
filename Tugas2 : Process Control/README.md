@@ -368,7 +368,7 @@ Amati kolom output dan catat informasi yang ditampilkan:
 
 3. Monitor dengan top dan perhatikan penggunaan CPU.
 
-## Praktikum 4: Menggunakan Sinyal
+## Sinyal
 
 ### 4.1. Mempelajari Sinyal
 
@@ -419,39 +419,6 @@ Amati kolom output dan catat informasi yang ditampilkan:
 
 5. Kembali ke terminal pertama dan tekan Ctrl+C untuk mengirim SIGINT.
 
-### 4.2. Membuat Zombie Process
-
-1. Buat script yang menghasilkan zombie process:
-   ```bash
-   cat > zombie.sh << 'EOL'
-   #!/bin/bash
-   
-   # Parent process
-   echo "Parent PID: $$"
-   
-   # Create child process
-   for i in {1..3}; do
-       bash -c "echo Child process $i with PID: \$\$; sleep 1; exit" &
-   done
-   
-   echo "Parent sleeping and not waiting for children..."
-   sleep 30
-   echo "Parent exiting"
-   EOL
-   
-   chmod +x zombie.sh
-   ```
-
-2. Jalankan script:
-   ```bash
-   ./zombie.sh &
-   ```
-
-3. Periksa status zombie:
-   ```bash
-   ps aux | grep defunct
-   ```
-
 ## Menjadwalkan Proses dengan cron
 
 ### 5.1. Membuat Crontab
@@ -478,6 +445,7 @@ Amati kolom output dan catat informasi yang ditampilkan:
    ```bash
    cat /tmp/cron_log.txt
    ```
+   ![alt text](img/crontab.png)
 
 ### 5.2. Format Crontab Lanjutan
 
