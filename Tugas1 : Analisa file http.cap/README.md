@@ -13,9 +13,9 @@
 
 ### 3. Eksplorasi dan Analisis di Wireshark
 
-![alt text](image1.png)
-![alt text](image2.png)
-![alt text](image3.png)
+![alt text](img/image1.png)
+![alt text](img/image2.png)
+![alt text](img/image3.png)
 
 
 #### IP Server dan Client
