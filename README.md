@@ -29,5 +29,5 @@ Dengan adanya repository ini, saya berharap dapat:
 ---
 
 **📢 Adrian Mendienta Tumanggor**
-Mahasiswa D4 Teknik Informatika A 🖥️ | Aku sipaling ADMINTJARINGAN 🌐
+Mahasiswa D4 Teknik Informatika A 🖥️ | Aku ADMINTJARINGAN 🌐
 
