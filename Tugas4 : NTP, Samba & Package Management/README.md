@@ -198,9 +198,12 @@ ping <vm-ip>
 
 5. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
    ```bash
-   smbclient -L //server-ip -U username
+   smbclient -L //server-ip -N
    ```
 ![alt text](image.png)
+
+-N menandakan koneksi tanpa password (mode tamu)
+
 
 6. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
    - Buka Dolphin File Manager.
@@ -251,12 +254,13 @@ ping <vm-ip>
    ```bash
    systemctl restart smbd
    ```
+   ![alt text](image-5.png)
 
 8. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
    ```bash
    smbclient -L //server-ip -U username
    ```
-
+![alt text](image-3.png)
 *(Tempat untuk screenshot hasil akses CLI ke Limited Shared Folder)*
 
 9. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
@@ -267,6 +271,7 @@ ping <vm-ip>
    - Pastikan bisa mengakses folder dengan autentikasi.
 
 *(Tempat untuk screenshot akses Dolphin ke Limited Shared Folder)*
+![alt text](image-4.png)
 
 ---
 
