@@ -144,6 +144,73 @@ masih menggunakan debian.pool.ntp.org
 ---
 
 ### **3. Konfigurasi Limited Shared Folder**
+### Persiapan Network
+
+#### Pengecekan Konektivitas Jaringan antara VM dan Host
+
+Sebelum mengkonfigurasi Samba, pastikan VM dan host dapat saling berkomunikasi melalui jaringan. Lakukan pengecekan konektivitas dengan:
+
+1. **Dari VM ke Host:**
+```bash
+ping <ip-address-host>
+```
+
+2. **Dari Host ke VM:**
+```bash
+ping <ip-address-vm>
+```
+
+#### Jenis-jenis Network Adaptor VM
+
+Penting untuk memahami perbedaan tipe jaringan VM untuk Samba server:
+
+1. **NAT (Network Address Translation)**
+   - VM dapat mengakses jaringan eksternal melalui IP host
+   - Host dapat berkomunikasi dengan VM, tetapi perangkat lain di jaringan tidak bisa langsung mengakses VM
+   - Tidak ideal untuk Samba server karena perangkat lain tidak bisa mengakses layanan
+
+2. **Bridge Network**
+   - VM mendapatkan IP dari DHCP yang sama dengan jaringan host (seolah-olah perangkat fisik terpisah)
+   - Semua perangkat di jaringan dapat langsung berkomunikasi dengan VM
+   - **Direkomendasikan untuk server Samba** karena memungkinkan semua perangkat di jaringan mengakses share
+
+3. **Macvlan**
+   - Mirip dengan bridge network tetapi membuat antarmuka virtual dengan MAC address terpisah
+   - VM terlihat seperti perangkat fisik terpisah di jaringan
+   - Dapat digunakan untuk Samba tetapi konfigurasinya lebih kompleks
+
+#### Mengkonfigurasi Bridged Network pada VM
+
+1. **Cek konfigurasi network saat ini:**
+```bash
+ip addr show
+```
+
+2. **Konfirmasi VM menggunakan Bridged Network:**
+```bash
+# Jika menggunakan NetworkManager
+nmcli connection show
+
+# Jika menggunakan netplan (Ubuntu)
+cat /etc/netplan/*.yaml
+```
+
+3. **Pastikan VM dan Host terhubung ke jaringan yang sama:**
+```bash
+# Di VM
+ip route
+# Di Host
+ip route
+```
+
+4. **Uji konektivitas:**
+```bash
+# Dari VM ke Host
+ping <host-ip>
+# Dari Host ke VM
+ping <vm-ip>
+```
+
 1. **Buat direktori untuk limited shared folder**
    ```bash
    mkdir -p /srv/samba/limited
