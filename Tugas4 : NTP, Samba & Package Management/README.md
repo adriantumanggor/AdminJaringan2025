@@ -182,10 +182,11 @@ Package management adalah sistem untuk menginstal, menghapus, dan memperbarui pe
 2. **DPKG (Debian Package Manager)**
 3. **Snap**
 
+### **3. Penggunaan NALA sebagai Pengganti APT di Debian 12**
+Untuk informasi lebih lanjut tentang penggunaan NALA sebagai pengganti APT di Debian 12, silakan lihat [file ini](./nala%20(apt%20frontend).md).
+
 ### **Referensi**
 - Materi **Ethol Debian 12 SysAdmin**
+- [Penggunaan NALA sebagai Pengganti APT di Debian 12](./nala%20(apt%20frontend).md)
 
 ---
-
-Dokumen ini berisi langkah-langkah terstruktur untuk instalasi dan konfigurasi NTP Client, Samba, serta rangkuman tentang package management di Debian 12. Tersedia ruang untuk dokumentasi berupa screenshot.
-
