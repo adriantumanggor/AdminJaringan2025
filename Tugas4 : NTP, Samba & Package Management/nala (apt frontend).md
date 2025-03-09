@@ -118,6 +118,6 @@ NALA adalah frontend CLI (Command Line Interface) untuk APT (Advanced Package To
 
 NALA adalah alat yang sangat berguna untuk mengelola paket di Debian 12. Dengan antarmuka yang lebih user-friendly, manajemen source list yang lebih baik, dan fitur-fitur tambahan seperti pembaruan paralel, NALA dapat meningkatkan efisiensi dan kenyamanan dalam mengelola sistem Anda. Dengan memahami latar belakang sistem repositori paket dan mirror, Anda dapat lebih menghargai manfaat yang ditawarkan oleh NALA.
 
-Untuk informasi lebih lanjut, Anda dapat mengunjungi [repositori resmi NALA di GitHub](https://github.com/volitank/nala).
+Untuk informasi lebih lanjut, Anda dapat mengunjungi [repositori resmi NALA di GitHub](https://gitlab.com/volian/nala).
 
 ---
