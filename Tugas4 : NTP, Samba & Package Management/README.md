@@ -1,10 +1,44 @@
 # **Tugas Instalasi dan Konfigurasi Layanan pada Debian 12**
 
-## **A. Instalasi dan Konfigurasi NTP Client**
-### **1. Instalasi dan Pengujian NTP Client**
-Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan langkah-langkah berikut:
+## **Spesifikasi Virtual Machine (VM)**
+Untuk memastikan performa optimal selama instalasi dan konfigurasi layanan, gunakan spesifikasi berikut untuk VM Debian 12:
+- **CPU**: 4 Core
+- **RAM**: 2 GB
+- **Storage**: 20 GB
 
-#### **Instalasi (Dilakukan di VM Debian 12)**
+*(Tempat untuk screenshot spesifikasi VM)*
+
+---
+
+## **Konfigurasi Mirror Debian**
+Agar proses instalasi paket lebih cepat dan stabil, gunakan mirror lokal dari PENS. Tambahkan baris berikut ke dalam file `/etc/apt/sources.list`:
+
+```plaintext
+deb https://kebo.pens.ac.id/debian/ bookworm main contrib non-free
+deb https://kebo.pens.ac.id/debian/ bookworm-updates main contrib non-free
+deb https://kebo.pens.ac.id/debian-security/ bookworm/updates main contrib non-free
+```
+
+### **Langkah-langkah Mengubah Mirror**
+1. Buka file `sources.list` menggunakan editor teks:
+   ```bash
+   sudo nano /etc/apt/sources.list
+   ```
+2. Ganti isi file dengan konfigurasi mirror di atas.
+3. Simpan perubahan dan keluar dari editor.
+4. Perbarui repositori paket:
+   ```bash
+   sudo apt update && sudo apt upgrade -y
+   ```
+
+*(Tempat untuk screenshot hasil update repositori)*
+
+---
+
+## **A. Instalasi dan Konfigurasi NTP Client**
+Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan langkah-langkah berikut.
+
+### **1. Instalasi NTP Client**
 1. **Perbarui repositori paket**
    ```bash
    sudo apt update && sudo apt upgrade -y
@@ -16,17 +50,17 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
 
 *(Tempat untuk screenshot instalasi paket NTP)*
 
-#### **Konfigurasi dan Pengujian NTP Client**
+### **2. Konfigurasi NTP Client**
 1. **Edit file konfigurasi NTP**
    ```bash
    sudo nano /etc/ntp.conf
    ```
 2. **Tambahkan atau sesuaikan baris berikut untuk menggunakan server NTP Indonesia:**
    ```plaintext
-    server 0.id.pool.ntp.org
-    server 1.id.pool.ntp.org
-    server 3.id.pool.ntp.org
-    server 2.id.pool.ntp.org
+   server 0.id.pool.ntp.org
+   server 1.id.pool.ntp.org
+   server 2.id.pool.ntp.org
+   server 3.id.pool.ntp.org
    ```
 3. **Simpan perubahan dan keluar dari editor.**
 4. **Restart layanan NTP untuk menerapkan konfigurasi**
@@ -40,24 +74,21 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
 
 *(Tempat untuk screenshot status layanan NTP)*
 
-6. **Verifikasi sinkronisasi waktu**
-   ```bash
-   ntpq -p
-   timedatectl
-   date
-   ```
+### **3. Verifikasi Sinkronisasi Waktu**
+Gunakan perintah berikut untuk memverifikasi sinkronisasi waktu:
+```bash
+ntpq -p
+timedatectl
+date
+```
 
 *(Tempat untuk screenshot hasil verifikasi waktu)*
-
-### **Referensi**
-- [Server World - NTP pada Debian 12](https://www.server-world.info/en/note?os=Debian_12&p=ntp&f=1)
-- [NTP Pool - Indonesia](https://www.ntppool.org/en/zone/id)
 
 ---
 
 ## **B. Instalasi dan Konfigurasi Samba**
 
-### **1. Instalasi dan Pengujian Samba (Dilakukan di VM Debian 12)**
+### **1. Instalasi Samba**
 1. **Perbarui repositori dan instal paket Samba**
    ```bash
    sudo apt update && sudo apt install samba smbclient cifs-utils -y
@@ -72,7 +103,9 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
 
 *(Tempat untuk screenshot status layanan Samba)*
 
-### **2. Konfigurasi dan Pengujian Public Shared Folder (Dilakukan di VM Debian 12)**
+---
+
+### **2. Konfigurasi Public Shared Folder**
 1. **Buat direktori untuk shared folder**
    ```bash
    sudo mkdir -p /srv/samba/public
@@ -109,7 +142,9 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
 
 *(Tempat untuk screenshot akses Dolphin ke Public Shared Folder)*
 
-### **3. Konfigurasi dan Pengujian Limited Shared Folder (Dilakukan di VM Debian 12)**
+---
+
+### **3. Konfigurasi Limited Shared Folder**
 1. **Buat direktori untuk limited shared folder**
    ```bash
    sudo mkdir -p /srv/samba/limited
@@ -166,9 +201,6 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
    - Pastikan bisa mengakses folder dengan autentikasi.
 
 *(Tempat untuk screenshot akses Dolphin ke Limited Shared Folder)*
-
-### **Referensi**
-- [Server World - Samba pada Debian 12](https://www.server-world.info/en/note?os=Debian_12&p=samba&f=1)
 
 ---
 
