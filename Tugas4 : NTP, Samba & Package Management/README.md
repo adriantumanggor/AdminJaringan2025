@@ -6,8 +6,6 @@ Untuk memastikan performa optimal selama instalasi dan konfigurasi layanan, guna
 - **RAM**: 2 GB
 - **Storage**: 20 GB
 
-*(Tempat untuk screenshot spesifikasi VM)*
-
 ---
 
 ## **Konfigurasi Mirror Debian**
@@ -22,16 +20,16 @@ deb https://kebo.pens.ac.id/debian-security/ bookworm/updates main contrib non-f
 ### **Langkah-langkah Mengubah Mirror**
 1. Buka file `sources.list` menggunakan editor teks:
    ```bash
-   sudo nano /etc/apt/sources.list
+   nano /etc/apt/sources.list
    ```
 2. Ganti isi file dengan konfigurasi mirror di atas.
 3. Simpan perubahan dan keluar dari editor.
 4. Perbarui repositori paket:
    ```bash
-   sudo apt update && sudo apt upgrade -y
+   apt update && apt upgrade -y
    ```
 
-*(Tempat untuk screenshot hasil update repositori)*
+![alt text](asset/mirorpens.png)
 
 ---
 
@@ -41,19 +39,20 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
 ### **1. Instalasi NTP Client**
 1. **Perbarui repositori paket**
    ```bash
-   sudo apt update && sudo apt upgrade -y
+   apt update && apt upgrade -y
    ```
 2. **Instal paket NTP yang diperlukan**
    ```bash
-   sudo apt install ntp ntpsec -y
+   apt install ntp ntpsec -y
    ```
 
-*(Tempat untuk screenshot instalasi paket NTP)*
+![alt text](asset/ntp1.png)
+masih menggunakan debian.pool.ntp.org
 
 ### **2. Konfigurasi NTP Client**
 1. **Edit file konfigurasi NTP**
    ```bash
-   sudo nano /etc/ntp.conf
+   nano /etc/ntp.conf
    ```
 2. **Tambahkan atau sesuaikan baris berikut untuk menggunakan server NTP Indonesia:**
    ```plaintext
@@ -65,11 +64,11 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
 3. **Simpan perubahan dan keluar dari editor.**
 4. **Restart layanan NTP untuk menerapkan konfigurasi**
    ```bash
-   sudo systemctl restart ntp
+   systemctl restart ntp
    ```
 5. **Pastikan layanan NTP berjalan**
    ```bash
-   sudo systemctl status ntp
+   systemctl status ntp
    ```
 
 *(Tempat untuk screenshot status layanan NTP)*
@@ -78,7 +77,6 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
 Gunakan perintah berikut untuk memverifikasi sinkronisasi waktu:
 ```bash
 ntpq -p
-timedatectl
 date
 ```
 
@@ -91,14 +89,14 @@ date
 ### **1. Instalasi Samba**
 1. **Perbarui repositori dan instal paket Samba**
    ```bash
-   sudo apt update && sudo apt install samba smbclient cifs-utils -y
+   apt update && apt install samba smbclient cifs-utils -y
    ```
 
 *(Tempat untuk screenshot instalasi paket Samba)*
 
 2. **Pastikan layanan berjalan**
    ```bash
-   sudo systemctl status smbd
+   systemctl status smbd
    ```
 
 *(Tempat untuk screenshot status layanan Samba)*
@@ -108,15 +106,15 @@ date
 ### **2. Konfigurasi Public Shared Folder**
 1. **Buat direktori untuk shared folder**
    ```bash
-   sudo mkdir -p /srv/samba/public
+   mkdir -p /srv/samba/public
    ```
 2. **Atur izin akses**
    ```bash
-   sudo chmod 777 /srv/samba/public
+   chmod 777 /srv/samba/public
    ```
 3. **Edit konfigurasi Samba**
    ```bash
-   sudo nano /etc/samba/smb.conf
+   nano /etc/samba/smb.conf
    ```
    Tambahkan konfigurasi berikut:
    ```plaintext
@@ -129,7 +127,7 @@ date
    ```
 4. **Restart layanan Samba**
    ```bash
-   sudo systemctl restart smbd
+   systemctl restart smbd
    ```
 
 *(Tempat untuk screenshot restart layanan Samba)*
@@ -147,24 +145,24 @@ date
 ### **3. Konfigurasi Limited Shared Folder**
 1. **Buat direktori untuk limited shared folder**
    ```bash
-   sudo mkdir -p /srv/samba/limited
+   mkdir -p /srv/samba/limited
    ```
 2. **Buat grup khusus untuk akses terbatas**
    ```bash
-   sudo groupadd sambashare
+   groupadd sambashare
    ```
 3. **Tambahkan pengguna ke grup**
    ```bash
-   sudo usermod -aG sambashare $USER
+   usermod -aG sambashare $USER
    ```
 4. **Atur izin dan kepemilikan direktori**
    ```bash
-   sudo chown -R root:sambashare /srv/samba/limited
-   sudo chmod 770 /srv/samba/limited
+   chown -R root:sambashare /srv/samba/limited
+   chmod 770 /srv/samba/limited
    ```
 5. **Edit konfigurasi Samba**
    ```bash
-   sudo nano /etc/samba/smb.conf
+   nano /etc/samba/smb.conf
    ```
    Tambahkan:
    ```plaintext
@@ -177,11 +175,11 @@ date
    ```
 6. **Setel password Samba untuk pengguna**
    ```bash
-   sudo smbpasswd -a $USER
+   smbpasswd -a $USER
    ```
 7. **Restart layanan Samba**
    ```bash
-   sudo systemctl restart smbd
+   systemctl restart smbd
    ```
 
 *(Tempat untuk screenshot restart layanan Samba setelah konfigurasi Limited Shared Folder)*
