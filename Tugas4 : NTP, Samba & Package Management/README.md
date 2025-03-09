@@ -134,7 +134,7 @@ date
 
 *(Tempat untuk screenshot restart layanan Samba)*
 
-5. **Uji akses dari Fedora Host melalui Dolphin:**
+5. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
    - Buka Dolphin File Manager.
    - Klik **Network** > **Samba Shares**.
    - Masukkan alamat: `smb://server-ip/Public`.
@@ -186,14 +186,14 @@ date
 
 *(Tempat untuk screenshot restart layanan Samba setelah konfigurasi Limited Shared Folder)*
 
-8. **Uji akses dari Fedora Host melalui CLI:**
+8. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
    ```bash
    smbclient -L //server-ip -U username
    ```
 
 *(Tempat untuk screenshot hasil akses CLI ke Limited Shared Folder)*
 
-9. **Uji akses dari Fedora Host melalui Dolphin:**
+9. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
    - Buka Dolphin File Manager.
    - Klik **Network** > **Samba Shares**.
    - Masukkan alamat: `smb://server-ip/Limited`.
