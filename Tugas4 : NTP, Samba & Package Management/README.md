@@ -127,12 +127,13 @@ masih menggunakan debian.pool.ntp.org
    ```bash
    systemctl restart smbd
    ```
+![alt text](image-1.png)
 
 5. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
    ```bash
    smbclient -L //server-ip -U username
    ```
-*(Tempat untuk screenshot akses Dolphin ke Public Shared Folder)*
+![alt text](image.png)
 
 6. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
    - Buka Dolphin File Manager.
@@ -140,7 +141,7 @@ masih menggunakan debian.pool.ntp.org
    - Masukkan alamat: `smb://server-ip/Public`.
    - Pastikan bisa mengakses folder tanpa autentikasi.
 
-*(Tempat untuk screenshot akses Dolphin ke Public Shared Folder)*
+![alt text](image-2.png)
 
 ---
 
