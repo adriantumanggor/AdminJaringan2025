@@ -83,69 +83,6 @@ masih menggunakan debian.pool.ntp.org
 ---
 
 ## **B. Instalasi dan Konfigurasi Samba**
-
-### **1. Instalasi Samba**
-1. **Perbarui repositori dan instal paket Samba**
-   ```bash
-   apt update && apt install samba smbclient cifs-utils -y
-   ```
-
-*(Tempat untuk screenshot instalasi paket Samba)*
-
-2. **Pastikan layanan berjalan**
-   ```bash
-   systemctl status smbd
-   ```
-
-![alt text](asset/installsmb.png)
-
----
-
-### **2. Konfigurasi Public Shared Folder**
-1. **Buat direktori untuk shared folder**
-   ```bash
-   mkdir -p /srv/samba/public
-   ```
-2. **Atur izin akses**
-   ```bash
-   chmod 777 /srv/samba/public
-   ```
-3. **Edit konfigurasi Samba**
-   ```bash
-   nano /etc/samba/smb.conf
-   ```
-   Tambahkan konfigurasi berikut:
-   ```plaintext
-   [Public]
-   path = /srv/samba/public
-   browsable = yes
-   writable = yes
-   guest ok = yes
-   read only = no
-   ```
-4. **Restart layanan Samba**
-   ```bash
-   systemctl restart smbd
-   ```
-![alt text](image-1.png)
-
-5. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
-   ```bash
-   smbclient -L //server-ip -U username
-   ```
-![alt text](image.png)
-
-6. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
-   - Buka Dolphin File Manager.
-   - Klik **Network** > **Samba Shares**.
-   - Masukkan alamat: `smb://server-ip/Public`.
-   - Pastikan bisa mengakses folder tanpa autentikasi.
-
-![alt text](image-2.png)
-
----
-
-### **3. Konfigurasi Limited Shared Folder**
 ### Persiapan Network
 
 #### Pengecekan Konektivitas Jaringan antara VM dan Host
@@ -213,6 +150,69 @@ ping <host-ip>
 ping <vm-ip>
 ```
 
+
+### **1. Instalasi Samba**
+1. **Perbarui repositori dan instal paket Samba**
+   ```bash
+   apt update && apt install samba smbclient cifs-utils -y
+   ```
+
+*(Tempat untuk screenshot instalasi paket Samba)*
+
+2. **Pastikan layanan berjalan**
+   ```bash
+   systemctl status smbd
+   ```
+
+![alt text](asset/installsmb.png)
+
+---
+
+### **2. Konfigurasi Public Shared Folder**
+1. **Buat direktori untuk shared folder**
+   ```bash
+   mkdir -p /srv/samba/public
+   ```
+2. **Atur izin akses**
+   ```bash
+   chmod 777 /srv/samba/public
+   ```
+3. **Edit konfigurasi Samba**
+   ```bash
+   nano /etc/samba/smb.conf
+   ```
+   Tambahkan konfigurasi berikut:
+   ```plaintext
+   [Public]
+   path = /srv/samba/public
+   browsable = yes
+   writable = yes
+   guest ok = yes
+   read only = no
+   ```
+4. **Restart layanan Samba**
+   ```bash
+   systemctl restart smbd
+   ```
+![alt text](image-1.png)
+
+5. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
+   ```bash
+   smbclient -L //server-ip -U username
+   ```
+![alt text](image.png)
+
+6. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
+   - Buka Dolphin File Manager.
+   - Klik **Network** > **Samba Shares**.
+   - Masukkan alamat: `smb://server-ip/Public`.
+   - Pastikan bisa mengakses folder tanpa autentikasi.
+
+![alt text](image-2.png)
+
+---
+
+### **3. Konfigurasi Limited Shared Folder**
 1. **Buat direktori untuk limited shared folder**
    ```bash
    mkdir -p /srv/samba/limited
