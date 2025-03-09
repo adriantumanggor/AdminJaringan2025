@@ -393,12 +393,17 @@ File konfigurasi yang tersisa setelah penghapusan paket dapat dibersihkan dengan
 
 ---
 
-Dokumen ini memberikan panduan lengkap untuk administrasi sistem Debian 12, mulai dari manajemen paket, pembaruan sistem, hingga pembersihan dan optimasi ruang disk. Dengan mengikuti panduan ini, pengguna dapat dengan mudah mengelola sistem Debian mereka, baik melalui terminal maupun antarmuka grafis.
-### **3. Penggunaan NALA sebagai Pengganti APT di Debian 12**
-Untuk informasi lebih lanjut tentang penggunaan NALA sebagai pengganti APT di Debian 12, silakan lihat [file ini](./nala%20(apt%20frontend).md).
+### **11. Penggunaan NALA sebagai Pengganti APT di Debian 12**
+NALA adalah antarmuka frontend untuk APT yang menawarkan pengalaman pengguna yang lebih baik dengan fitur-fitur tambahan seperti tampilan yang lebih bersih dan manajemen dependensi yang lebih baik. Untuk informasi lebih lanjut tentang penggunaan NALA sebagai pengganti APT di Debian 12, silakan lihat [file ini](./nala%20(apt%20frontend).md).
 
 ### **Referensi**
-- Materi **Ethol Debian 12 SysAdmin**
+- Materi [**Ethol Debian 12 SysAdmin**](asset/handbook.pdf)
 - [Penggunaan NALA sebagai Pengganti APT di Debian 12](./nala%20(apt%20frontend).md)
+
+---
+
+
+Ini memberikan panduan lengkap untuk administrasi sistem Debian 12, mulai dari manajemen paket, pembaruan sistem, hingga pembersihan dan optimasi ruang disk. Dengan mengikuti panduan ini, pengguna dapat dengan mudah mengelola sistem Debian mereka, baik melalui terminal maupun antarmuka grafis.
+
 
 ---
