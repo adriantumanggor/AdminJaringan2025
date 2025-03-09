@@ -47,6 +47,7 @@ Agar host memiliki waktu yang sinkron dengan server NTP di Indonesia, lakukan la
    ```
 
 ![alt text](asset/ntp1.png)
+
 masih menggunakan debian.pool.ntp.org
 
 ### **2. Konfigurasi NTP Client**
