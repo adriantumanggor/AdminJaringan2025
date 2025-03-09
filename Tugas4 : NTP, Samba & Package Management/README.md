@@ -71,16 +71,13 @@ masih menggunakan debian.pool.ntp.org
    systemctl status ntp
    ```
 
-*(Tempat untuk screenshot status layanan NTP)*
+6. Gunakan perintah berikut untuk memverifikasi sinkronisasi waktu:
+   ```bash
+   ntpq -p
+   ```
 
-### **3. Verifikasi Sinkronisasi Waktu**
-Gunakan perintah berikut untuk memverifikasi sinkronisasi waktu:
-```bash
-ntpq -p
-date
-```
-
-*(Tempat untuk screenshot hasil verifikasi waktu)*
+![alt text](asset/ntp2.png)
+![alt text](asset/ntp3.png)
 
 ---
 
@@ -99,7 +96,7 @@ date
    systemctl status smbd
    ```
 
-*(Tempat untuk screenshot status layanan Samba)*
+![alt text](asset/installsmb.png)
 
 ---
 
@@ -130,9 +127,13 @@ date
    systemctl restart smbd
    ```
 
-*(Tempat untuk screenshot restart layanan Samba)*
+5. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
+   ```bash
+   smbclient -L //server-ip -U username
+   ```
+*(Tempat untuk screenshot akses Dolphin ke Public Shared Folder)*
 
-5. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
+6. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
    - Buka Dolphin File Manager.
    - Klik **Network** > **Samba Shares**.
    - Masukkan alamat: `smb://server-ip/Public`.
@@ -181,8 +182,6 @@ date
    ```bash
    systemctl restart smbd
    ```
-
-*(Tempat untuk screenshot restart layanan Samba setelah konfigurasi Limited Shared Folder)*
 
 8. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
    ```bash
