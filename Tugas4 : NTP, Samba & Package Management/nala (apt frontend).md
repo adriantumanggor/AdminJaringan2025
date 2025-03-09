@@ -1,123 +1,85 @@
-# Dokumentasi Penggunaan NALA sebagai Pengganti APT di Debian 12
+# Penggunaan NALA sebagai Pengganti APT di Debian 12
 
-## Latar Belakang
+## 1. Pendahuluan
 
-### Sistem Repositori Paket dan Mirror
+NALA adalah frontend CLI (Command Line Interface) untuk APT (Advanced Package Tool) yang dirancang untuk meningkatkan pengalaman pengguna dalam mengelola paket di Debian dan turunannya. Dengan antarmuka yang lebih user-friendly, NALA menawarkan berbagai keunggulan dibandingkan APT tradisional, seperti pemilihan mirror tercepat, output yang lebih informatif, dan dukungan pembaruan paralel.
+
+## 2. Konsep Dasar
+
+### 2.1 Repositori Paket dan Mirror
 
 #### Apa itu Repositori Paket?
-Repositori paket adalah tempat penyimpanan koleksi perangkat lunak (paket) yang dapat diinstal pada sistem operasi berbasis Linux seperti Debian. Setiap paket berisi program, library, atau file konfigurasi yang diperlukan untuk menjalankan perangkat lunak tersebut. Repositori ini dikelola oleh pengembang dan komunitas yang bertanggung jawab untuk memastikan bahwa paket-paket tersebut aman, terbaru, dan kompatibel dengan sistem.
+Repositori paket adalah koleksi perangkat lunak (paket) yang dapat diinstal pada sistem operasi berbasis Linux seperti Debian. Repositori ini berisi program, library, atau file konfigurasi yang diperlukan untuk menjalankan perangkat lunak.
 
 #### Apa itu Mirror?
-Mirror adalah salinan (copy) dari repositori utama yang disimpan di server-server di seluruh dunia. Tujuan dari mirror adalah untuk mendistribusikan beban unduhan dan mempercepat akses ke paket-paket tersebut. Ketika Anda menginstal atau memperbarui paket, sistem Anda akan terhubung ke mirror terdekat untuk mengunduh paket yang diperlukan. Ini mengurangi latensi dan meningkatkan kecepatan unduhan.
+Mirror adalah salinan repositori utama yang tersedia di berbagai server di seluruh dunia. Tujuannya adalah untuk:
+- **Meningkatkan kecepatan unduhan**, karena pengguna akan terhubung ke mirror terdekat.
+- **Menyediakan redundansi**, jika satu mirror down, sistem dapat beralih ke mirror lain.
+- **Mendistribusikan beban server**, sehingga server utama tidak terlalu terbebani.
 
-#### Mengapa Mirror Penting?
-- **Kecepatan**: Mirror yang dekat secara geografis akan memberikan kecepatan unduhan yang lebih baik.
-- **Redundansi**: Jika satu mirror down, sistem dapat beralih ke mirror lain.
-- **Load Balancing**: Distribusi beban unduhan ke berbagai server mencegah overload pada server utama.
+### 2.2 Keunggulan NALA dibandingkan APT
 
-### Mengapa NALA?
+1. **Manajemen Source List yang Lebih Baik**
+   - Memudahkan pengguna dalam menambahkan, menghapus, atau memodifikasi daftar repositori.
+   - Memilih mirror tercepat secara otomatis untuk mempercepat proses unduhan.
 
-NALA adalah frontend CLI (Command Line Interface) untuk APT (Advanced Package Tool) yang dirancang untuk meningkatkan pengalaman pengguna dalam mengelola paket di Debian dan turunannya. Berikut beberapa alasan mengapa NALA bagus untuk digunakan:
+2. **Antarmuka yang Lebih User-Friendly**
+   - Output yang lebih terstruktur dan mudah dibaca.
+   - Warna dan format teks yang lebih jelas dibandingkan APT tradisional.
 
-1. **Manajemen Source List yang Lebih Baik**:
-   - NALA memungkinkan pengguna untuk dengan mudah menambahkan, menghapus, atau memodifikasi source list (daftar repositori) tanpa perlu mengedit file secara manual.
-   - NALA secara otomatis memilih mirror tercepat berdasarkan lokasi geografis pengguna, sehingga mempercepat proses unduhan.
+3. **Fitur Tambahan**
+   - Mendukung pembaruan paralel untuk mempercepat instalasi paket.
+   - Opsi untuk mengunduh paket tanpa langsung menginstalnya.
+   - Riwayat transaksi yang lebih informatif.
 
-2. **Antarmuka yang Lebih User-Friendly**:
-   - NALA menyediakan output yang lebih informatif dan mudah dibaca dibandingkan dengan APT tradisional.
-   - Warna dan format teks yang lebih baik membuatnya lebih mudah untuk memahami proses yang sedang berlangsung.
+4. **Kompatibilitas dengan APT**
+   - Semua perintah dan opsi APT dapat digunakan dalam NALA.
 
-3. **Fitur Tambahan**:
-   - NALA mendukung pembaruan paralel, yang berarti beberapa paket dapat diunduh secara bersamaan, mengurangi waktu yang dibutuhkan untuk pembaruan sistem.
-   - NALA juga menyediakan opsi untuk mengunduh paket tanpa menginstalnya, yang berguna untuk persiapan instalasi offline.
+## 3. Instalasi NALA di Debian 12
 
-4. **Kompatibilitas**:
-   - NALA sepenuhnya kompatibel dengan APT, sehingga semua perintah dan opsi yang Anda kenal dari APT tetap dapat digunakan.
+### 3.1 Update dan Upgrade Sistem
+Sebelum menginstal NALA, pastikan sistem Anda dalam kondisi terbaru:
+```bash
+sudo apt update && sudo apt upgrade -y
+```
 
-## Cara Menggunakan NALA di Debian 12
+### 3.2 Instalasi NALA
+Gunakan perintah berikut untuk menginstal NALA:
+```bash
+sudo apt install nala
+```
 
-### Instalasi NALA
+## 4. Konfigurasi NALA
 
-1. **Update dan Upgrade Sistem**:
-   Sebelum menginstal NALA, pastikan sistem Anda sudah diperbarui:
-   ```bash
-   sudo apt update && sudo apt upgrade -y
-   ```
+Setelah instalasi, jalankan perintah berikut untuk mengonfigurasi mirror tercepat:
+```bash
+sudo nala fetch
+```
+Perintah ini akan menguji berbagai mirror dan memilih yang tercepat berdasarkan lokasi Anda.
 
-2. **Instal NALA**:
-   Anda dapat menginstal NALA menggunakan perintah berikut:
-   ```bash
-   sudo apt install nala
-   ```
 
-### Konfigurasi NALA
+## 5. Penggunaan Dasar NALA
 
-1. **Menjalankan NALA untuk Pertama Kali**:
-   Setelah instalasi, jalankan NALA untuk pertama kali untuk mengkonfigurasi mirror tercepat:
-   ```bash
-   sudo nala fetch
-   ```
-   Perintah ini akan menguji berbagai mirror dan memilih yang tercepat berdasarkan lokasi Anda.
+| Perintah | Fungsi |
+|----------|--------|
+| `sudo nala update` | Memperbarui daftar paket dari repositori |
+| `sudo nala upgrade` | Memperbarui daftar paket dan meng-upgrade sistem |
+| `sudo nala install <nama_paket>` | Menginstal paket tertentu |
+| `sudo nala remove <nama_paket>` | Menghapus paket yang terinstal |
+| `sudo nala clean` | Membersihkan arsip paket yang telah diunduh |
+| `sudo nala autopurge` | Menghapus paket yang tidak lagi diperlukan |
+| `sudo nala autoremove` | Menghapus paket yang tidak lagi digunakan |
+| `sudo nala fetch` | Memilih mirror tercepat untuk unduhan |
+| `sudo nala history` | Menampilkan riwayat transaksi |
+| `sudo nala list` | Menampilkan daftar paket berdasarkan nama |
+| `sudo nala purge <nama_paket>` | Menghapus paket beserta konfigurasinya |
+| `sudo nala search <kata_kunci>` | Mencari nama dan deskripsi paket |
+| `sudo nala show <nama_paket>` | Menampilkan detail paket |
 
-2. **Melihat Daftar Mirror**:
-   Anda dapat melihat daftar mirror yang tersedia dengan perintah:
-   ```bash
-   sudo nala list-mirrors
-   ```
 
-### Penggunaan Dasar NALA
+## 7. Kesimpulan
 
-1. **Update Daftar Paket**:
-   Untuk memperbarui daftar paket dari repositori, gunakan perintah:
-   ```bash
-   sudo nala update
-   ```
+NALA adalah alat yang sangat berguna untuk mengelola paket di Debian 12. Dengan antarmuka yang lebih ramah pengguna, manajemen source list yang lebih baik, serta fitur-fitur tambahan seperti pembaruan paralel dan riwayat transaksi, NALA meningkatkan efisiensi dan kenyamanan dalam pengelolaan sistem.
 
-2. **Upgrade Paket**:
-   Untuk mengupgrade semua paket yang terinstal ke versi terbaru, gunakan perintah:
-   ```bash
-   sudo nala upgrade
-   ```
+Untuk informasi lebih lanjut, kunjungi [repositori resmi NALA di GitHub](https://gitlab.com/volian/nala).
 
-3. **Instal Paket**:
-   Untuk menginstal paket tertentu, gunakan perintah:
-   ```bash
-   sudo nala install nama_paket
-   ```
-
-4. **Hapus Paket**:
-   Untuk menghapus paket yang terinstal, gunakan perintah:
-   ```bash
-   sudo nala remove nama_paket
-   ```
-
-5. **Pembersihan Cache**:
-   Untuk membersihkan cache paket yang sudah diunduh, gunakan perintah:
-   ```bash
-   sudo nala clean
-   ```
-
-### Fitur Lanjutan
-
-1. **Unduh Paket Tanpa Menginstal**:
-   Jika Anda ingin mengunduh paket tanpa menginstalnya, gunakan perintah:
-   ```bash
-   sudo nala download nama_paket
-   ```
-
-2. **Pembaruan Paralel**:
-   NALA mendukung pembaruan paralel untuk mempercepat proses unduhan. Fitur ini diaktifkan secara default.
-
-3. **Melihat Riwayat Transaksi**:
-   Anda dapat melihat riwayat transaksi (instalasi, penghapusan, dll.) dengan perintah:
-   ```bash
-   sudo nala history
-   ```
-
-## Kesimpulan
-
-NALA adalah alat yang sangat berguna untuk mengelola paket di Debian 12. Dengan antarmuka yang lebih user-friendly, manajemen source list yang lebih baik, dan fitur-fitur tambahan seperti pembaruan paralel, NALA dapat meningkatkan efisiensi dan kenyamanan dalam mengelola sistem Anda. Dengan memahami latar belakang sistem repositori paket dan mirror, Anda dapat lebih menghargai manfaat yang ditawarkan oleh NALA.
-
-Untuk informasi lebih lanjut, Anda dapat mengunjungi [repositori resmi NALA di GitHub](https://gitlab.com/volian/nala).
-
----
