@@ -57,6 +57,9 @@ sudo nala fetch
 ```
 Perintah ini akan menguji berbagai mirror dan memilih yang tercepat berdasarkan lokasi Anda.
 
+![alt text](image.png)
+Gambar di atas adalah contoh hasil dari perintah `nala fetch` yang dijalankan di komputer saya yang berlokasi di Surabaya, Jawa Timur, Indonesia.
+
 
 ## 5. Penggunaan Dasar NALA
 
