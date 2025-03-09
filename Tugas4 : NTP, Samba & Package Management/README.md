@@ -157,8 +157,6 @@ ping <vm-ip>
    apt update && apt install samba smbclient cifs-utils -y
    ```
 
-*(Tempat untuk screenshot instalasi paket Samba)*
-
 2. **Pastikan layanan berjalan**
    ```bash
    systemctl status smbd
@@ -194,13 +192,13 @@ ping <vm-ip>
    ```bash
    systemctl restart smbd
    ```
-![alt text](image-1.png)
+![alt text](asset/samba1.png)
 
 5. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
    ```bash
    smbclient -L //server-ip -N
    ```
-![alt text](image.png)
+![alt text](asset/samba2.png)
 
 -N menandakan koneksi tanpa password (mode tamu)
 
@@ -211,7 +209,7 @@ ping <vm-ip>
    - Masukkan alamat: `smb://server-ip/Public`.
    - Pastikan bisa mengakses folder tanpa autentikasi.
 
-![alt text](image-2.png)
+![alt text](asset/samba3.png)
 
 ---
 
@@ -254,14 +252,13 @@ ping <vm-ip>
    ```bash
    systemctl restart smbd
    ```
-   ![alt text](image-5.png)
+   ![alt text](asset/samba6.png)
 
 8. **Uji akses dari Fedora Host(OS laptop saya) melalui CLI:**
    ```bash
    smbclient -L //server-ip -U username
    ```
-![alt text](image-3.png)
-*(Tempat untuk screenshot hasil akses CLI ke Limited Shared Folder)*
+![alt text](asset/samba4.png)
 
 9. **Uji akses dari Fedora Host(OS laptop saya) melalui Dolphin:**
    - Buka Dolphin File Manager.
@@ -270,8 +267,7 @@ ping <vm-ip>
    - Masukkan username dan password.
    - Pastikan bisa mengakses folder dengan autentikasi.
 
-*(Tempat untuk screenshot akses Dolphin ke Limited Shared Folder)*
-![alt text](image-4.png)
+![alt text](asset/samba5.png)
 
 ---
 
