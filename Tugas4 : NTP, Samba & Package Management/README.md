@@ -1,4 +1,4 @@
-# **Tugas Instalasi dan Konfigurasi Layanan pada Debian 12**
+# **Tugas Konfigurasi NTP, Samba & Package Management pada Debian 12**
 
 ## **Spesifikasi Virtual Machine (VM)**
 Untuk memastikan performa optimal selama instalasi dan konfigurasi layanan, gunakan spesifikasi berikut untuk VM Debian 12:
