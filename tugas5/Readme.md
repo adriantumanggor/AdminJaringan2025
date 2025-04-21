@@ -6,9 +6,6 @@
 *dns*  
 
 **Workshop Administrasi Jaringan**  
-
-![logo pens](media/image1.jpg)  
-
 **Nama Dosen Pengampu**:  
 Bapak Dr. Ferry Astika Saputra ST, M.Sc  
 <br>
