@@ -156,7 +156,7 @@ ping <vm-ip>
    ```bash
    apt update && apt install samba smbclient cifs-utils -y
    ```
-
+w
 2. **Pastikan layanan berjalan**
    ```bash
    systemctl status smbd
